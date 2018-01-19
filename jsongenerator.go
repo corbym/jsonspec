@@ -1,11 +1,11 @@
 package jsonspec
 
 import (
-	"github.com/corbym/gogiven/generator"
-	"encoding/json"
 	"bytes"
-	"github.com/corbym/gogiven/base"
+	"encoding/json"
 	"fmt"
+	"github.com/corbym/gogiven/base"
+	"github.com/corbym/gogiven/generator"
 )
 
 //TestOutputGenerator is an implementation of the GoGivensOutputGenerator that generates an html file per
@@ -77,8 +77,8 @@ func convertToMapStringInterface(someMap map[interface{}]interface{}) (converted
 func NewTestingT(data *base.TestMetaData) *TestResults {
 	return &TestResults{Failed: data.Failed(),
 		TestOutput: data.TestOutput(),
-		Id: data.TestId,
-		Skipped: data.Skipped(),
+		Id:         data.TestId,
+		Skipped:    data.Skipped(),
 	}
 }
 

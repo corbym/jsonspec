@@ -1,16 +1,16 @@
 package jsonspec_test
 
 import (
+	"bytes"
+	"encoding/json"
+	"github.com/corbym/gocrest"
 	"github.com/corbym/gocrest/is"
 	. "github.com/corbym/gocrest/then"
 	"github.com/corbym/gogiven/base"
 	"github.com/corbym/gogiven/generator"
 	"github.com/corbym/gogiven/testdata"
-	"testing"
 	"github.com/corbym/jsonspec"
-	"github.com/corbym/gocrest"
-	"encoding/json"
-	"bytes"
+	"testing"
 )
 
 var jsonString string
@@ -22,7 +22,7 @@ func init() {
 
 func TestTestOutputGenerator_Generate(testing *testing.T) {
 	fileIsConverted()
-	AssertThat(testing, jsonString, isValidJson());
+	AssertThat(testing, jsonString, isValidJson())
 	AssertThat(testing, jsonString, is.EqualTo(
 		`{
 			"title": "Generator Test",
