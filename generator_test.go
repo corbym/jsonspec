@@ -23,7 +23,7 @@ func init() {
 func TestTestOutputGenerator_Generate(testing *testing.T) {
 	fileIsConverted()
 	AssertThat(testing, jsonString, isValidJson())
-	AssertThat(testing, jsonString, is.EqualTo(
+	AssertThat(testing, jsonString, is.EqualToIgnoringWhitespace(
 		`{
 			"title": "Generator Test",
 			"test_state": {
@@ -46,6 +46,7 @@ func TestTestOutputGenerator_Generate(testing *testing.T) {
 			}
 		}`))
 }
+
 func isValidJson() *gocrest.Matcher {
 	matcher := &gocrest.Matcher{Describe: "valid jsonString"}
 	matcher.Matches = func(actual interface{}) bool {
@@ -57,6 +58,7 @@ func isValidJson() *gocrest.Matcher {
 	}
 	return matcher
 }
+
 func TestTestOutputGenerator_GenerateConcurrently(testing *testing.T) {
 	for i := 0; i < 15; i++ {
 		go func() {
@@ -69,7 +71,7 @@ func TestTestOutputGenerator_GenerateConcurrently(testing *testing.T) {
 }
 
 func TestTestOutputGenerator_FileExtension(t *testing.T) {
-	AssertThat(t, underTest.FileExtension(), is.EqualTo(".jsonString"))
+	AssertThat(t, underTest.FileExtension(), is.EqualTo(".json"))
 }
 
 func TestTestOutputGenerator_Panics(t *testing.T) {
