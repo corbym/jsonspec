@@ -21,9 +21,30 @@ func init() {
 }
 
 func TestTestOutputGenerator_Generate(testing *testing.T) {
-	fileIsConvertedToHtml()
+	fileIsConverted()
 	AssertThat(testing, jsonString, isValidJson());
-	AssertThat(testing, jsonString, is.EqualToIgnoringWhitespace(`{"Title":"Generator Test","SomeMap":{"foo":{"TestingT":{"TestId":"foo"},"TestTitle":"Generator Test","GivenWhenThen":"GivenWhenThen"}}}`))
+	AssertThat(testing, jsonString, is.EqualTo(
+		`{
+			"title": "Generator Test",
+			"test_state": {
+				"foo": {
+					"test_results": {
+						"id": "foo",
+						"failed": false,
+						"skipped": false,
+						"test_output": ""
+					},
+					"test_title": "Generator Test",
+					"interesting_givens": {
+						"faff": "flap"
+					},
+					"captured_io": {
+						"foob": "barb"
+					},
+					"given_when_then": "GivenWhenThen"
+				}
+			}
+		}`))
 }
 func isValidJson() *gocrest.Matcher {
 	matcher := &gocrest.Matcher{Describe: "valid jsonString"}
@@ -62,7 +83,7 @@ func TestTestOutputGenerator_Panics(t *testing.T) {
 	underTest.Generate(data)
 }
 
-func fileIsConvertedToHtml() {
+func fileIsConverted() {
 	jsonString = underTest.Generate(newPageData(newSomeMap()))
 }
 
