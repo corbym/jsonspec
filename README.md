@@ -1,6 +1,6 @@
-# htmlspec
-[![Build status](https://travis-ci.org/corbym/htmlspec.svg?branch=master)](https://github.com/corbym/htmlspec)
-[![GoDoc](https://godoc.org/github.com/corbym/htmlspec?status.svg)](http://godoc.org/github.com/corbym/htmlspec)
-[![Go Report Card](https://goreportcard.com/badge/github.com/corbym/htmlspec)](https://goreportcard.com/report/github.com/corbym/htmlspec)
+# jsonspec
+[![Build status](https://travis-ci.org/corbym/jsonspec.svg?branch=master)](https://github.com/corbym/jsonspec)
+[![GoDoc](https://godoc.org/github.com/corbym/jsonspec?status.svg)](http://godoc.org/github.com/corbym/jsonspec)
+[![Go Report Card](https://goreportcard.com/badge/github.com/corbym/jsonspec)](https://goreportcard.com/report/github.com/corbym/jsonspec)
 
-HTML output generator for the BDD framework [GoGiven](https://github.com/corbym/gogiven)
+JSON output generator for the BDD framework [GoGiven](https://github.com/corbym/gogiven)
