@@ -9,7 +9,7 @@ type testResults struct {
 	TestOutput string `json:"test_output"`
 }
 
-//NewJsonData is internal and creates a new json data object for marshalling test data
+//NewTestResults is internal and creates a new json data object for marshalling test data
 func NewTestResults(data *base.TestMetaData) *testResults {
 	return &testResults{Failed: data.Failed(),
 		TestOutput: data.TestOutput(),
