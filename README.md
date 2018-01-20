@@ -4,3 +4,33 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/corbym/jsonspec)](https://goreportcard.com/report/github.com/corbym/jsonspec)
 
 JSON output generator for the BDD framework [GoGiven](https://github.com/corbym/gogiven)
+
+Import:
+
+```go
+import github.com/corbym/jsonspec
+```
+
+Usage:
+
+```go
+package foo
+import (
+	"testing"
+	"github.com/corbym/gocrest/then"
+	"github.com/corbym/gocrest/is"
+	"github.com/corbym/gogiven"
+	"github.com/corbym/jsonspec"
+	"os"
+)
+
+func TestMain(testmain *testing.M) {
+	gogiven.Generator = jsonspec.NewTestOutputGenerator()
+	runOutput := testmain.Run()
+	gogiven.GenerateTestOutput()
+	os.Exit(runOutput)
+}
+
+... actual tests...
+
+```
