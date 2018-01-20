@@ -17,8 +17,6 @@ Usage:
 package foo
 import (
 	"testing"
-	"github.com/corbym/gocrest/then"
-	"github.com/corbym/gocrest/is"
 	"github.com/corbym/gogiven"
 	"github.com/corbym/jsonspec"
 	"os"
