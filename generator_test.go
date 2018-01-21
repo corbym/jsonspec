@@ -41,7 +41,9 @@ func TestTestOutputGenerator_Generate(testing *testing.T) {
 					"captured_io": {
 						"foob": "barb"
 					},
-					"given_when_then": "GivenWhenThen"
+					"given_when_then": [
+						"GivenWhenThen"
+					]
 				}
 			}
 		}`))
@@ -94,7 +96,7 @@ func newSomeMap() *base.SomeMap {
 	some := base.NewSome(testingT,
 		"Generator Test",
 		base.NewTestMetaData("foo"),
-		"GivenWhenThen",
+		[]string{"GivenWhenThen"},
 		func(givens testdata.InterestingGivens) {
 			givens["faff"] = "flap"
 		})
