@@ -1,6 +1,8 @@
 package model
 
-import "github.com/corbym/gogiven/base"
+import (
+	"github.com/corbym/gogiven/generator"
+)
 
 type testResults struct {
 	Id         string `json:"id"`
@@ -10,10 +12,10 @@ type testResults struct {
 }
 
 //NewTestResults is internal and creates a new json data object for marshalling test data
-func NewTestResults(data *base.TestMetaData) *testResults {
-	return &testResults{Failed: data.Failed(),
-		TestOutput: data.TestOutput(),
-		Id:         data.TestId,
-		Skipped:    data.Skipped(),
+func NewTestResults(data *generator.TestResult) *testResults {
+	return &testResults{Failed: data.Failed,
+		TestOutput: data.TestOutput,
+		Id: data.TestId,
+		Skipped: data.Skipped,
 	}
 }

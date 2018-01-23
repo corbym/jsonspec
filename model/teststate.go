@@ -2,7 +2,7 @@ package model
 
 import (
 	"fmt"
-	"github.com/corbym/gogiven/base"
+	"github.com/corbym/gogiven/generator"
 )
 
 type testState struct {
@@ -14,13 +14,13 @@ type testState struct {
 }
 
 //NewTestState is internal and creates a new json data object for marshalling test data
-func NewTestState(some *base.Some) *testState {
+func NewTestState(testData generator.TestData) *testState {
 	return &testState{
-		TestResults:       NewTestResults(some.TestingT),
-		TestTitle:         some.TestTitle,
-		InterestingGivens: convertToMapStringInterface(some.InterestingGivens()),
-		CapturedIO:        convertToMapStringInterface(some.CapturedIO()),
-		GivenWhenThen:     some.GivenWhenThen,
+		TestResults:       NewTestResults(testData.TestResult),
+		TestTitle:         testData.TestTitle,
+		InterestingGivens: convertToMapStringInterface(testData.InterestingGivens),
+		CapturedIO:        convertToMapStringInterface(testData.CapturedIO),
+		GivenWhenThen:     testData.GivenWhenThen,
 	}
 }
 

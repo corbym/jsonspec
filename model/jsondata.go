@@ -11,9 +11,9 @@ type jsonData struct {
 func NewJsonData(pageData *generator.PageData) (jsonPageData *jsonData) {
 	jsonPageData = new(jsonData)
 	jsonPageData.Title = pageData.Title
-	jsonPageData.TestState = make(map[string]*testState, len(*pageData.SomeMap))
-	for k, v := range *pageData.SomeMap {
-		jsonPageData.TestState[k] = NewTestState(v)
+	jsonPageData.TestState = make(map[string]*testState, len(pageData.TestResults))
+	for k, v := range pageData.TestResults {
+		jsonPageData.TestState[k] = NewTestState(*v)
 	}
 	return
 }
