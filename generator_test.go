@@ -12,7 +12,7 @@ import (
 )
 
 var jsonString string
-var underTest *jsonspec.TestOutputGenerator
+var underTest generator.GoGivensOutputGenerator
 
 func init() {
 	underTest = jsonspec.NewTestOutputGenerator()
@@ -75,7 +75,7 @@ func TestTestOutputGenerator_GenerateConcurrently(testing *testing.T) {
 }
 
 func TestTestOutputGenerator_FileExtension(t *testing.T) {
-	AssertThat(t, underTest.FileExtension(), is.EqualTo("text/json"))
+	AssertThat(t, underTest.ContentType(), is.EqualTo("text/json"))
 }
 
 func TestTestOutputGenerator_Panics(t *testing.T) {

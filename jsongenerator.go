@@ -21,7 +21,7 @@ func NewTestOutputGenerator() *TestOutputGenerator {
 }
 
 // FileExtension for the output generated.
-func (outputGenerator *TestOutputGenerator) FileExtension() string {
+func (outputGenerator *TestOutputGenerator) ContentType() string {
 	return "text/json"
 }
 
