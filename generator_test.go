@@ -66,14 +66,16 @@ func TestTestOutputGenerator_GenerateConcurrently(testing *testing.T) {
 		go func() {
 			data := newPageData(false, false)
 
-			html := underTest.Generate(data)
-			AssertThat(testing, html, is.ValueContaining("Generator Test"))
+			json := underTest.Generate(data)
+			buffer := new(bytes.Buffer)
+			buffer.ReadFrom(json)
+			AssertThat(testing, buffer.String(), is.ValueContaining("Generator Test"))
 		}()
 	}
 }
 
 func TestTestOutputGenerator_FileExtension(t *testing.T) {
-	AssertThat(t, underTest.FileExtension(), is.EqualTo(".json"))
+	AssertThat(t, underTest.FileExtension(), is.EqualTo("text/json"))
 }
 
 func TestTestOutputGenerator_Panics(t *testing.T) {
@@ -85,7 +87,9 @@ func TestTestOutputGenerator_Panics(t *testing.T) {
 }
 
 func fileIsConverted() {
-	jsonString = underTest.Generate(newPageData(true, true))
+	buffer := new(bytes.Buffer)
+	buffer.ReadFrom(underTest.Generate(newPageData(true, true)))
+	jsonString = buffer.String()
 }
 
 func newPageData(skipped bool, failed bool) *generator.PageData {
