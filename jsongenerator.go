@@ -22,7 +22,7 @@ func NewTestOutputGenerator() *TestOutputGenerator {
 
 // FileExtension for the output generated.
 func (outputGenerator *TestOutputGenerator) ContentType() string {
-	return "text/json"
+	return "application/json"
 }
 
 // Generate generates json output for a test. The return string contains the html

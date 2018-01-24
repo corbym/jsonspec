@@ -75,7 +75,7 @@ func TestTestOutputGenerator_GenerateConcurrently(testing *testing.T) {
 }
 
 func TestTestOutputGenerator_FileExtension(t *testing.T) {
-	AssertThat(t, underTest.ContentType(), is.EqualTo("text/json"))
+	AssertThat(t, underTest.ContentType(), is.EqualTo("application/json"))
 }
 
 func TestTestOutputGenerator_Panics(t *testing.T) {
