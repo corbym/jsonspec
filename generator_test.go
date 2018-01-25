@@ -9,6 +9,7 @@ import (
 	"github.com/corbym/gogiven/generator"
 	"github.com/corbym/jsonspec"
 	"testing"
+	"errors"
 )
 
 var jsonString string
@@ -79,11 +80,17 @@ func TestTestOutputGenerator_FileExtension(t *testing.T) {
 }
 
 func TestTestOutputGenerator_Panics(t *testing.T) {
+	jsonMarshaller := underTest.(*jsonspec.TestOutputGenerator).MarshalJson
 	defer func() {
 		recovered := recover()
+		underTest.(*jsonspec.TestOutputGenerator).MarshalJson = jsonMarshaller
 		AssertThat(t, recovered, is.Not(is.Nil()))
 	}()
-	underTest.Generate(nil)
+	underTest.(*jsonspec.TestOutputGenerator).MarshalJson = func(v interface{}) ([]byte, error) {
+		return nil, errors.New("bugger")
+	}
+
+	underTest.Generate(newPageData(false, true))
 }
 
 func fileIsConverted() {
@@ -115,4 +122,3 @@ func newPageData(skipped bool, failed bool) *generator.PageData {
 		Title:       "Generator Test",
 	}
 }
-
