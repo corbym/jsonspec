@@ -32,7 +32,7 @@ func (outputGenerator *TestOutputGenerator) ContentType() string {
 // The function panics if the template cannot be generated.
 func (outputGenerator *TestOutputGenerator) Generate(pageData *generator.PageData) (io.Reader) {
 	jsonBytes, err := outputGenerator.MarshalJson(model.NewJsonData(pageData))
-	if err != nil{
+	if err != nil {
 		panic("Could not marshal pageData to json")
 	}
 	var out = new(bytes.Buffer)

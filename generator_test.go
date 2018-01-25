@@ -67,9 +67,9 @@ func TestTestOutputGenerator_GenerateConcurrently(testing *testing.T) {
 		go func() {
 			data := newPageData(false, false)
 
-			json := underTest.Generate(data)
+			jsonContent := underTest.Generate(data)
 			buffer := new(bytes.Buffer)
-			buffer.ReadFrom(json)
+			buffer.ReadFrom(jsonContent)
 			AssertThat(testing, buffer.String(), is.ValueContaining("Generator Test"))
 		}()
 	}
@@ -79,18 +79,20 @@ func TestTestOutputGenerator_FileExtension(t *testing.T) {
 	AssertThat(t, underTest.ContentType(), is.EqualTo("application/json"))
 }
 
-func TestTestOutputGenerator_Panics(t *testing.T) {
-	jsonMarshaller := underTest.(*jsonspec.TestOutputGenerator).MarshalJson
+func TestTestOutputGenerator_Errors(t *testing.T) {
+	localUnderTest := jsonspec.NewTestOutputGenerator()
+
+	jsonMarshaller := localUnderTest.MarshalJson
 	defer func() {
 		recovered := recover()
-		underTest.(*jsonspec.TestOutputGenerator).MarshalJson = jsonMarshaller
+		localUnderTest.MarshalJson = jsonMarshaller
 		AssertThat(t, recovered, is.Not(is.Nil()))
 	}()
-	underTest.(*jsonspec.TestOutputGenerator).MarshalJson = func(v interface{}) ([]byte, error) {
+	localUnderTest.MarshalJson = func(v interface{}) ([]byte, error) {
 		return nil, errors.New("bugger")
 	}
 
-	underTest.Generate(newPageData(false, true))
+	localUnderTest.Generate(newPageData(false, true))
 }
 
 func fileIsConverted() {
