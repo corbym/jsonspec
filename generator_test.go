@@ -10,6 +10,7 @@ import (
 	"github.com/corbym/jsonspec"
 	"testing"
 	"errors"
+	"github.com/corbym/gogiven/base"
 )
 
 var jsonString string
@@ -40,11 +41,17 @@ func TestTestOutputGenerator_Generate(testing *testing.T) {
 					"captured_io": {
 						"foob": "barb"
 					},
-					"given_when_then": [
-						"given",
-						"when",
-						"then"
-					]
+					"given_when_then": {
+						"given_when_then": [
+							"given",
+							"when",
+							"then"
+						],
+						"comment": [
+							"Fooing is best",
+							"done with friends"
+						]
+					}
 				}
 			}
 		}`))
@@ -108,8 +115,11 @@ func newPageData(skipped bool, failed bool) *generator.PageData {
 	interestingGivens := make(map[interface{}]interface{})
 	interestingGivens["faff"] = "flap"
 	testData["test title"] = &generator.TestData{
-		TestTitle:         "test title",
-		GivenWhenThen:     []string{"given", "when", "then"},
+		TestTitle: "test title",
+		ParsedTestContent: base.ParsedTestContent{
+			GivenWhenThen: []string{"given", "when", "then"},
+			Comment:       []string{"Fooing is best", "done with friends"},
+		},
 		CapturedIO:        capturedIO,
 		InterestingGivens: interestingGivens,
 		TestResult: &generator.TestResult{

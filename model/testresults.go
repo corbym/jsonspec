@@ -12,8 +12,8 @@ type testResults struct {
 }
 
 //NewTestResults is internal and creates a new json data object for marshalling test data
-func NewTestResults(data *generator.TestResult) *testResults {
-	return &testResults{Failed: data.Failed,
+func NewTestResults(data *generator.TestResult) testResults {
+	return testResults{Failed: data.Failed,
 		TestOutput: data.TestOutput,
 		Id: data.TestId,
 		Skipped: data.Skipped,
