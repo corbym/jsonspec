@@ -37,32 +37,34 @@ func TestMain(testmain *testing.M) {
 ## Example Output
 ```json
 {
-	"title": "Clock Test",
-	"test_state": {
-		"github.com/corbym/berlinclock_test.TestGivenAClockWhenTimeIsEnteredThenCorrectClock": {
-			"test_results": {
-				"id": "github.com/corbym/berlinclock_test.TestGivenAClockWhenTimeIsEnteredThenCorrectClock",
-				"failed": false,
-				"skipped": false,
-				"test_output": ""
-			},
-			"test_title": "Given A Clock When Time Is Entered Then Correct Clock",
-			"interesting_givens": {
-				"expected": "YOOOOOOOOOOOOOOOOOOOOOOO",
-				"time": "00:00:00"
-			},
-			"captured_io": {},
-			"given_when_then": [
-				"Given testing clock parameters under test",
-				"When",
-				"Clock err = berlinclock clock test time",
-				"Then",
-				"Then assert that testing err is nil",
-				"Then assert that testing clock is",
-				"Equal to test expected",
-				"Reasonf \"time incorrect for % s\" test time"
-			]
+			"title": "Generator Test",
+			"test_state": {
+				"test title": {
+					"test_results": {
+						"id": "abc2124",
+						"failed": true,
+						"skipped": true,
+						"test_output": "well alrighty then"
+					},
+					"test_title": "test title",
+					"interesting_givens": {
+						"faff": "flap"
+					},
+					"captured_io": {
+						"foob": "barb"
+					},
+					"given_when_then": {
+						"given_when_then": [
+							"given",
+							"when",
+							"then"
+						],
+						"comment": [
+							"Fooing is best",
+							"done with friends"
+						]
+					}
+				}
+			}
 		}
-	}
-}
 ```
