@@ -6,7 +6,7 @@ import (
 	"github.com/corbym/gogiven/base"
 )
 
-type ParsedTestContent struct {
+type parsedTestContent struct {
 	GivenWhenThen []string `json:"given_when_then"`
 	// Comment contains each comment line from the tests' comment block
 	Comment []string `json:"comment"`
@@ -17,7 +17,7 @@ type testState struct {
 	TestTitle         string                 `json:"test_title"`
 	InterestingGivens map[string]interface{} `json:"interesting_givens"`
 	CapturedIO        map[string]interface{} `json:"captured_io"`
-	GivenWhenThen     ParsedTestContent      `json:"given_when_then"`
+	GivenWhenThen     parsedTestContent      `json:"given_when_then"`
 }
 
 //newTestState is internal and creates a new json data object for marshalling test data
@@ -30,8 +30,8 @@ func newTestState(testData generator.TestData) *testState {
 		GivenWhenThen:     newParsedTestContent(testData.ParsedTestContent),
 	}
 }
-func newParsedTestContent(content base.ParsedTestContent) ParsedTestContent {
-	return ParsedTestContent{
+func newParsedTestContent(content base.ParsedTestContent) parsedTestContent {
+	return parsedTestContent{
 		GivenWhenThen: content.GivenWhenThen,
 		Comment:       content.Comment,
 	}
