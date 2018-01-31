@@ -20,17 +20,17 @@ type testState struct {
 	GivenWhenThen     ParsedTestContent      `json:"given_when_then"`
 }
 
-//NewTestState is internal and creates a new json data object for marshalling test data
-func NewTestState(testData generator.TestData) *testState {
+//newTestState is internal and creates a new json data object for marshalling test data
+func newTestState(testData generator.TestData) *testState {
 	return &testState{
-		TestResults:       NewTestResults(testData.TestResult),
+		TestResults:       newTestResults(testData.TestResult),
 		TestTitle:         testData.TestTitle,
 		InterestingGivens: convertToMapStringInterface(testData.InterestingGivens),
 		CapturedIO:        convertToMapStringInterface(testData.CapturedIO),
-		GivenWhenThen:     NewParsedTestContent(testData.ParsedTestContent),
+		GivenWhenThen:     newParsedTestContent(testData.ParsedTestContent),
 	}
 }
-func NewParsedTestContent(content base.ParsedTestContent) ParsedTestContent {
+func newParsedTestContent(content base.ParsedTestContent) ParsedTestContent {
 	return ParsedTestContent{
 		GivenWhenThen: content.GivenWhenThen,
 		Comment:       content.Comment,

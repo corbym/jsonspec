@@ -12,17 +12,17 @@ import (
 // test. It is thread safe between goroutines.
 type TestOutputGenerator struct {
 	generator.GoGivensOutputGenerator
-	MarshalJson func(v interface{}) ([]byte, error)
+	MarshalJSON func(v interface{}) ([]byte, error)
 }
 
 //NewTestOutputGenerator creates a template that is used to generate the json output.
 func NewTestOutputGenerator() *TestOutputGenerator {
 	outputGenerator := new(TestOutputGenerator)
-	outputGenerator.MarshalJson = json.Marshal
+	outputGenerator.MarshalJSON = json.Marshal
 	return outputGenerator
 }
 
-// FileExtension for the output generated.
+// ContentType for the output generated.
 func (outputGenerator *TestOutputGenerator) ContentType() string {
 	return "application/json"
 }
@@ -31,7 +31,7 @@ func (outputGenerator *TestOutputGenerator) ContentType() string {
 // that goes into the output file generated in gogivens.GenerateTestOutput().
 // The function panics if the template cannot be generated.
 func (outputGenerator *TestOutputGenerator) Generate(pageData generator.PageData) (io.Reader) {
-	jsonBytes, err := outputGenerator.MarshalJson(model.NewJsonData(pageData))
+	jsonBytes, err := outputGenerator.MarshalJSON(model.NewJSONData(pageData))
 	if err != nil {
 		panic("Could not marshal pageData to json")
 	}

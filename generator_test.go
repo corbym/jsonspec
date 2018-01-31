@@ -22,7 +22,7 @@ func init() {
 
 func TestTestOutputGenerator_Generate(testing *testing.T) {
 	fileIsConverted()
-	AssertThat(testing, jsonString, isValidJson())
+	AssertThat(testing, jsonString, isValidJSON())
 	AssertThat(testing, jsonString, is.EqualToIgnoringWhitespace(
 		`{
 			"title": "Generator Test",
@@ -57,7 +57,7 @@ func TestTestOutputGenerator_Generate(testing *testing.T) {
 		}`))
 }
 
-func isValidJson() *gocrest.Matcher {
+func isValidJSON() *gocrest.Matcher {
 	matcher := &gocrest.Matcher{Describe: "valid jsonString"}
 	matcher.Matches = func(actual interface{}) bool {
 		buffer := &bytes.Buffer{}
@@ -89,13 +89,13 @@ func TestTestOutputGenerator_FileExtension(t *testing.T) {
 func TestTestOutputGenerator_Errors(t *testing.T) {
 	localUnderTest := jsonspec.NewTestOutputGenerator()
 
-	jsonMarshaller := localUnderTest.MarshalJson
+	jsonMarshaller := localUnderTest.MarshalJSON
 	defer func() {
 		recovered := recover()
-		localUnderTest.MarshalJson = jsonMarshaller
+		localUnderTest.MarshalJSON = jsonMarshaller
 		AssertThat(t, recovered, is.Not(is.Nil()))
 	}()
-	localUnderTest.MarshalJson = func(v interface{}) ([]byte, error) {
+	localUnderTest.MarshalJSON = func(v interface{}) ([]byte, error) {
 		return nil, errors.New("bugger")
 	}
 
