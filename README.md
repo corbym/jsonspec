@@ -37,34 +37,34 @@ func TestMain(testmain *testing.M) {
 ## Example Output
 ```json
 {
-			"title": "Generator Test",
-			"test_state": {
-				"test title": {
-					"test_results": {
-						"id": "abc2124",
-						"failed": true,
-						"skipped": true,
-						"test_output": "well alrighty then"
-					},
-					"test_title": "test title",
-					"interesting_givens": {
-						"faff": "flap"
-					},
-					"captured_io": {
-						"foob": "barb"
-					},
-					"given_when_then": {
-						"given_when_then": [
-							"given",
-							"when",
-							"then"
-						],
-						"comment": [
-							"Fooing is best",
-							"done with friends"
-						]
-					}
-				}
-			}
-		}
+  "title": "Generator Test",
+  "test_state": {
+    "test title": {
+      "test_results": {
+        "id": "abc2124",
+        "failed": true,
+        "skipped": true,
+        "test_output": "well alrighty then"
+      },
+      "test_title": "test title",
+      "interesting_givens": {
+        "faff": "flap"
+      },
+      "captured_io": {
+        "foob": "barb"
+      },
+      "given_when_then": {
+        "given_when_then": [
+          "given",
+          "when",
+          "then"
+        ],
+        "comment": [
+          "Fooing is best",
+          "done with friends"
+        ]
+      }
+    }
+  }
+}
 ```
