@@ -30,7 +30,7 @@ func (outputGenerator *TestOutputGenerator) ContentType() string {
 // Generate generates json output for a test. The return string contains the html
 // that goes into the output file generated in gogivens.GenerateTestOutput().
 // The function panics if the template cannot be generated.
-func (outputGenerator *TestOutputGenerator) Generate(pageData *generator.PageData) (io.Reader) {
+func (outputGenerator *TestOutputGenerator) Generate(pageData generator.PageData) (io.Reader) {
 	jsonBytes, err := outputGenerator.MarshalJson(model.NewJsonData(pageData))
 	if err != nil {
 		panic("Could not marshal pageData to json")

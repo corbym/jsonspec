@@ -70,9 +70,9 @@ func isValidJson() *gocrest.Matcher {
 }
 
 func TestTestOutputGenerator_GenerateConcurrently(testing *testing.T) {
+	data := newPageData(false, false)
 	for i := 0; i < 15; i++ {
 		go func() {
-			data := newPageData(false, false)
 
 			jsonContent := underTest.Generate(data)
 			buffer := new(bytes.Buffer)
@@ -108,13 +108,13 @@ func fileIsConverted() {
 	jsonString = buffer.String()
 }
 
-func newPageData(skipped bool, failed bool) *generator.PageData {
-	testData := make(map[string]*generator.TestData)
+func newPageData(skipped bool, failed bool) generator.PageData {
+	testData := make(map[string]generator.TestData)
 	capturedIO := make(map[interface{}]interface{})
 	capturedIO["foob"] = "barb"
 	interestingGivens := make(map[interface{}]interface{})
 	interestingGivens["faff"] = "flap"
-	testData["test title"] = &generator.TestData{
+	testData["test title"] = generator.TestData{
 		TestTitle: "test title",
 		ParsedTestContent: base.ParsedTestContent{
 			GivenWhenThen: []string{"given", "when", "then"},
@@ -122,14 +122,14 @@ func newPageData(skipped bool, failed bool) *generator.PageData {
 		},
 		CapturedIO:        capturedIO,
 		InterestingGivens: interestingGivens,
-		TestResult: &generator.TestResult{
+		TestResult: generator.TestResult{
 			Failed:     failed,
 			Skipped:    skipped,
 			TestOutput: "well alrighty then",
-			TestId:     "abc2124",
+			TestID:     "abc2124",
 		},
 	}
-	return &generator.PageData{
+	return generator.PageData{
 		TestResults: testData,
 		Title:       "Generator Test",
 	}
