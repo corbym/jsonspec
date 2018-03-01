@@ -26,8 +26,8 @@ func TestTestOutputGenerator_Generate(testing *testing.T) {
 	AssertThat(testing, jsonString, is.EqualToIgnoringWhitespace(
 		`{
 			"title": "Generator Test",
-			"test_state": {
-				"test title": {
+			"test_state": [
+				{
 					"test_results": {
 						"id": "abc2124",
 						"failed": true,
@@ -53,7 +53,7 @@ func TestTestOutputGenerator_Generate(testing *testing.T) {
 						]
 					}
 				}
-			}
+			]
 		}`))
 }
 
@@ -109,12 +109,13 @@ func fileIsConverted() {
 }
 
 func newPageData(skipped bool, failed bool) generator.PageData {
-	testData := make(map[string]generator.TestData)
+	var testData []generator.TestData
+
 	capturedIO := make(map[interface{}]interface{})
 	capturedIO["foob"] = "barb"
 	interestingGivens := make(map[interface{}]interface{})
 	interestingGivens["faff"] = "flap"
-	testData["test title"] = generator.TestData{
+	testData = append(testData, generator.TestData{
 		TestTitle: "test title",
 		ParsedTestContent: base.ParsedTestContent{
 			GivenWhenThen: []string{"given", "when", "then"},
@@ -128,9 +129,9 @@ func newPageData(skipped bool, failed bool) generator.PageData {
 			TestOutput: "well alrighty then",
 			TestID:     "abc2124",
 		},
-	}
+	})
 	return generator.PageData{
-		TestResults: testData,
-		Title:       "Generator Test",
+		TestData: testData,
+		Title:    "Generator Test",
 	}
 }

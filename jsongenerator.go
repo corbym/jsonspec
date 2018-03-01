@@ -39,3 +39,7 @@ func (outputGenerator *TestOutputGenerator) Generate(pageData generator.PageData
 	json.Indent(out, jsonBytes, "", "\t")
 	return out
 }
+
+func (outputGenerator *TestOutputGenerator) GenerateIndex(indexData []generator.IndexData) io.Reader{
+	return bytes.NewReader(nil) //TODO: implement some kind of index
+}
