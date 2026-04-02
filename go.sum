@@ -1,0 +1,6 @@
+github.com/corbym/gocrest v1.1.2 h1:HwMyOILE0E/BqC1vs/JjanEj+HXeYPGZzbppIgd1/Os=
+github.com/corbym/gocrest v1.1.2/go.mod h1:vhNebfdBGx5l0Nh0OM/CvIVqGAnR9AAbI5qA9OxRUOU=
+github.com/corbym/gogiven v1.4.0 h1:YZEb7iuPdDlb85IEUcEkl8sER8nlJgQeXfuApXnl+to=
+github.com/corbym/gogiven v1.4.0/go.mod h1:/axDOlw/25hg30aMzKRiOidbPM0tgFiaQH3Xz/b2D7I=
+github.com/fatih/camelcase v1.0.0 h1:hxNvNX/xYBp0ovncs8WyWZrOrpBNub/JfaMvbURyft8=
+github.com/fatih/camelcase v1.0.0/go.mod h1:yN2Sb0lFhZJUdVvtELVWefmrXpuZESvPmqwoZc+/fpc=

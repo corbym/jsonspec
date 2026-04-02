@@ -1,26 +1,27 @@
 # jsonspec
-[![Build status](https://travis-ci.org/corbym/jsonspec.svg?branch=master)](https://github.com/corbym/jsonspec)
-[![GoDoc](https://godoc.org/github.com/corbym/jsonspec?status.svg)](http://godoc.org/github.com/corbym/jsonspec)
+[![CI](https://github.com/corbym/jsonspec/actions/workflows/ci.yml/badge.svg)](https://github.com/corbym/jsonspec/actions/workflows/ci.yml)
+[![Go Reference](https://pkg.go.dev/badge/github.com/corbym/jsonspec.svg)](https://pkg.go.dev/github.com/corbym/jsonspec)
 [![Go Report Card](https://goreportcard.com/badge/github.com/corbym/jsonspec)](https://goreportcard.com/report/github.com/corbym/jsonspec)
-[![Coverage Status](https://coveralls.io/repos/github/corbym/jsonspec/badge.svg?branch=master)](https://coveralls.io/github/corbym/jsonspec?branch=master)
 
 JSON output generator for the BDD framework [GoGiven](https://github.com/corbym/gogiven)
 
-Import:
+## Installation
 
-```go
-import github.com/corbym/jsonspec
+```sh
+go get github.com/corbym/jsonspec
 ```
 
-Usage:
+## Usage
 
 ```go
 package foo
+
 import (
+	"os"
 	"testing"
+
 	"github.com/corbym/gogiven"
 	"github.com/corbym/jsonspec"
-	"os"
 )
 
 func TestMain(testmain *testing.M) {
@@ -30,16 +31,15 @@ func TestMain(testmain *testing.M) {
 	os.Exit(runOutput)
 }
 
-... actual tests...
-
+// ... actual tests ...
 ```
 
 ## Example Output
 ```json
 {
   "title": "Generator Test",
-  "test_state": {
-    "test title": {
+  "test_state": [
+    {
       "test_results": {
         "id": "abc2124",
         "failed": true,
@@ -65,6 +65,6 @@ func TestMain(testmain *testing.M) {
         ]
       }
     }
-  }
+  ]
 }
 ```

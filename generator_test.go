@@ -57,14 +57,14 @@ func TestTestOutputGenerator_Generate(testing *testing.T) {
 		}`))
 }
 
-func isValidJSON() *gocrest.Matcher {
-	matcher := &gocrest.Matcher{Describe: "valid jsonString"}
-	matcher.Matches = func(actual interface{}) bool {
+func isValidJSON() *gocrest.Matcher[string] {
+	matcher := &gocrest.Matcher[string]{Describe: "valid jsonString"}
+	matcher.Matches = func(actual string) bool {
 		buffer := &bytes.Buffer{}
-		buffer.WriteString(actual.(string))
+		buffer.WriteString(actual)
 		var f interface{}
-		error := json.Unmarshal(buffer.Bytes(), &f)
-		return error == nil
+		err := json.Unmarshal(buffer.Bytes(), &f)
+		return err == nil
 	}
 	return matcher
 }
@@ -77,7 +77,7 @@ func TestTestOutputGenerator_GenerateConcurrently(testing *testing.T) {
 			jsonContent := underTest.Generate(data)
 			buffer := new(bytes.Buffer)
 			buffer.ReadFrom(jsonContent)
-			AssertThat(testing, buffer.String(), is.ValueContaining("Generator Test"))
+			AssertThat(testing, buffer.String(), is.StringContaining("Generator Test"))
 		}()
 	}
 }
@@ -93,7 +93,7 @@ func TestTestOutputGenerator_Errors(t *testing.T) {
 	defer func() {
 		recovered := recover()
 		localUnderTest.MarshalJSON = jsonMarshaller
-		AssertThat(t, recovered, is.Not(is.Nil()))
+		AssertThat(t, recovered != nil, is.EqualTo(true))
 	}()
 	localUnderTest.MarshalJSON = func(v interface{}) ([]byte, error) {
 		return nil, errors.New("bugger")
@@ -109,13 +109,13 @@ func fileIsConverted() {
 }
 
 func newPageData(skipped bool, failed bool) generator.PageData {
-	var testData []generator.TestData
+	testData := make(map[string]generator.TestData)
 
 	capturedIO := make(map[interface{}]interface{})
 	capturedIO["foob"] = "barb"
 	interestingGivens := make(map[interface{}]interface{})
 	interestingGivens["faff"] = "flap"
-	testData = append(testData, generator.TestData{
+	testData["test title"] = generator.TestData{
 		TestTitle: "test title",
 		ParsedTestContent: base.ParsedTestContent{
 			GivenWhenThen: []string{"given", "when", "then"},
@@ -129,9 +129,9 @@ func newPageData(skipped bool, failed bool) generator.PageData {
 			TestOutput: "well alrighty then",
 			TestID:     "abc2124",
 		},
-	})
+	}
 	return generator.PageData{
-		TestData: testData,
-		Title:    "Generator Test",
+		TestResults: testData,
+		Title:       "Generator Test",
 	}
 }

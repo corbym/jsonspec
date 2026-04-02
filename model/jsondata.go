@@ -12,7 +12,7 @@ type JSONData struct {
 func NewJSONData(pageData generator.PageData) *JSONData {
 	jsonPageData := new(JSONData)
 	jsonPageData.Title = pageData.Title
-	for _, v := range pageData.TestData {
+	for _, v := range pageData.TestResults {
 		jsonPageData.TestState = append(jsonPageData.TestState, newTestState(v))
 	}
 	return jsonPageData
